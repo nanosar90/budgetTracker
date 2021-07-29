@@ -15,11 +15,12 @@ app.use(express.json());
 
 app.use(express.static("public"));
 
-mongoose.connect("mongodb://localhost/budgetMani", {
-  useNewUrlParser: true,
-  useFindAndModify: false,
-  useUnifiedTopology: true
-});
+const db = mongoose.connect(`mongodb+srv://nathan:password1234@cluster0.dfgvs.mongodb.net/budgetTracker?retryWrites=true&w=majority`, {
+    useNewUrlParser: true,
+    useFindAndModify: false
+})
+    .then(() => console.log("MongoDB Database is Connected"))
+    .catch((err) => console.log(`An error has occured in DB connection: ${err}`))
 
 // routes
 app.use(require("./routes/api.js"));
